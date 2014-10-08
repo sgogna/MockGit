@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+
+  <bean id="testGuiProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+    <property name="locations">
+      <list>
+        <value>classpath:config/gui.properties</value>
+        <value>classpath*:testgui-env*.properties</value>
+      </list>
+    </property>
+    <property name="ignoreUnresolvablePlaceholders" value="false" />
+    <property name="ignoreResourceNotFound" value="false" />
+  </bean>
+
+  <bean id="testGuiConfig" class="spring.Configuration" scope="session">
+    <property name="recDir">
+      <value>${recDir}</value>
+    </property>
+    <property name="customTagsFilePath">
+      <value>${customTagsFilePath}</value>
+    </property>
+
+  </bean>
+
+  <bean id="mainFileManager" class="fileManagers.MainFileManager" scope="session">
+    <property name="mainDirPath">
+      <value>${recDir}</value>
+    </property>
+  </bean>
+
+  <bean id="fileTagsManager" class="filehandlers.FilesTagsManager" scope="session">
+    <property name="fileManager" ref="mainFileManager" />
+  </bean>
+
+  <bean id="profileFilesManager" class="com.sabre.ssw.proxy.compare.profile.ProfileFilesManager">
+    <property name="savePath" value="${customTagsFilePath}"/>
+  </bean>
+
+  <bean id="concurrentRequestsFilesManager" class="com.sabre.ssw.proxy.concurrent.fileManager.ConcurrentRequestsRuleFilesManager">
+    <property name="savePath" value="${concurrentRuleFilesPath}"/>
+  </bean>
+
+  <bean id="concurrentRequestsManager" class="com.sabre.ssw.proxy.concurrent.fileManager.ConcurrentRequestsManager" init-method="readRules">
+    <property name="requestsRuleFilesManager" ref="concurrentRequestsFilesManager" />
+  </bean>
+
+  <bean id="sessionConfiguration" class="util.SessionConfiguration" scope="session" />
+
+  <bean id="profileManager" class="filehandlers.ProfileManager" init-method="readProfiles" scope="session">
+    <property name="profileFilesManager" ref="profileFilesManager" />
+  </bean>
+
+  <bean id="customDiffQuickAddWindow" class="pages.components.customdiff.CustomDiffQuickAddWindow" init-method="initialize" scope="session">
+    <property name="profileManager" ref="profileManager" />
+  </bean>
+
+  <bean id="customDiffWindow" class="pages.components.customdiff.CustomDiffWindow" init-method="initializeWindow" scope="session">
+    <property name="profileManager" ref="profileManager" />
+  </bean>
+
+  <import resource="classpath*:testgui-env*.xml" />
+</beans>

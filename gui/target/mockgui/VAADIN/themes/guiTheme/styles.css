@@ -1,0 +1,120 @@
+@import "../reindeer/styles.css";
+
+.v-menubar-clear {
+	background: none;
+	padding-left: 0px;
+	padding-right: 0px;
+	text-shadow: none;
+	color: black;
+}
+
+.v-menubar-menuitem-normal-style{
+	color: black;
+	background: none;
+}
+
+.v-menubar-menuitem-normal-style:HOVER{
+	color: black;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+.v-label-border-label{
+	font-weight: bold;
+	font-size: 11pt;
+}
+
+.v-menubar-menuitem-active-style{
+	font-weight: bold;
+	color: black;
+	background: rgba(0, 0, 0, 0.1);
+}
+.v-menubar-menuitem-active-style:HOVER{
+	color: black;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+
+.v-table-header-cell {
+
+}
+
+/* Basic style for all cells. */
+.v-table-files .v-table-cell-content {
+
+    /*width: 20px; */
+    height: 18px;
+}
+
+.v-table-cell-content-blue {
+text-align: center;
+    color: blue;
+}
+
+/* Style specifically for the "gray" cells. */
+.v-table-cell-content-gray {
+text-align: left;
+    color: gray;
+}
+
+/* Style specifically for the "black" cells. */
+.v-table-cell-content-black {
+text-align: left;
+ color: black;
+}
+
+.v-table-cell-content-black-center {
+text-align: center;
+ color: black;
+}
+
+/* Style specifically for the "error" cells. */
+.v-table-cell-content-error {
+text-align: center;
+    color: red;
+}
+
+.v-table-cell-content-passed {
+text-align: center;
+    color: green;
+}
+
+.v-table-cell-content-middle {
+text-align: center;
+color: black;
+}
+
+
+/* Style specifically for the "gray" cells. */
+.v-table-cell-content-gray-bold {
+text-align: left;
+    color: gray;
+    font-weight: bold;
+}
+
+/* Style specifically for the "black" cells. */
+.v-table-cell-content-black-bold {
+text-align: left;
+ color: black;
+ font-weight: bold;
+}
+
+/* Style specifically for the "error" cells. */
+.v-table-cell-content-error-bold {
+text-align: center;
+    color: red;
+    font-weight: bold;
+}
+
+.v-table-cell-content-middle-bold {
+text-align: center;
+color: black;
+font-weight: bold;
+}
+
+
+
+
+.v-table-cell-content-icon {
+
+    color: red;
+}

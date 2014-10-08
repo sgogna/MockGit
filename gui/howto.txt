@@ -1,0 +1,12 @@
+To run jetty:
+mvn -Pexecute-test-gui jetty:run 
+
+starts webapp on address:
+http://localhost:872/testgui/
+
+
+Default settings are being read from src/main/resources/classpath/gui.properties file
+
+To start jetty with other settings consider using:
+-DrecDir=... - dir where recorded files are stored
+

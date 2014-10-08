@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/core" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/fake-response-generator" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/gui" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/test-comparator" vcs="svn" />
+  </component>
+</project>
+

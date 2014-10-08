@@ -1,0 +1,30 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header>
+        <ns5:MessageHeader xmlns:ns8="http://www.w3.org/2000/09/xmldsig#" xmlns:ns7="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:ns6="http://www.w3.org/1999/xlink" xmlns:ns5="http://www.ebxml.org/namespaces/messageHeader" xmlns:ns4="http://webservices.sabre.com/sabreXML/2003/07">
+            <ns5:From>
+                <ns5:PartyId>99999</ns5:PartyId>
+            </ns5:From>
+            <ns5:To>
+                <ns5:PartyId>123123</ns5:PartyId>
+            </ns5:To>
+            <ns5:CPAId>VA</ns5:CPAId>
+            <ns5:ConversationId>VAVA_3F1BA4CEB73F41E17B171DC68A1E80F6</ns5:ConversationId>
+            <ns5:Service>SabreCommand</ns5:Service>
+            <ns5:Action>SabreCommandLLSRQ</ns5:Action>
+            <ns5:MessageData>
+                <ns5:MessageId>mid:2013-07-21T23:02:12@sabre.com</ns5:MessageId>
+                <ns5:Timestamp>2013-07-21T23:02:12</ns5:Timestamp>
+            </ns5:MessageData>
+        </ns5:MessageHeader>
+        <ns7:Security xmlns:ns8="http://www.w3.org/2000/09/xmldsig#" xmlns:ns7="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:ns6="http://www.w3.org/1999/xlink" xmlns:ns5="http://www.ebxml.org/namespaces/messageHeader" xmlns:ns4="http://webservices.sabre.com/sabreXML/2003/07">
+            <ns7:BinarySecurityToken>Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/STSB!ICESMSLB\/STS.LB!-3768988230739844860!1967385!0</ns7:BinarySecurityToken>
+        </ns7:Security>
+    </soap:Header>
+    <soap:Body>
+        <ns4:SabreCommandLLSRQ xmlns:ns8="http://www.w3.org/2000/09/xmldsig#" xmlns:ns7="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:ns6="http://www.w3.org/1999/xlink" xmlns:ns5="http://www.ebxml.org/namespaces/messageHeader" xmlns:ns4="http://webservices.sabre.com/sabreXML/2003/07" Version="2003A.TsabreXML1.6.1">
+            <ns4:Request Output="SCREEN">
+                <ns4:HostCommand>WPRQÂMNZDÂP1ADT</ns4:HostCommand>
+            </ns4:Request>
+        </ns4:SabreCommandLLSRQ>
+    </soap:Body>
+</soap:Envelope>

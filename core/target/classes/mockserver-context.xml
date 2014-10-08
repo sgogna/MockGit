@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="testProxyProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="locations">
+            <list>
+                <value>classpath:config/core.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="false"/>
+        <property name="ignoreResourceNotFound" value="false"/>
+    </bean>
+
+    <bean id="sessionsInfoManager" class="com.sabre.sabresonic.mockserver.core.sessionsinfo.SessionsInfoManager">
+        <property name="deleteOlderThan" value="${maxAgeOfRecordInCounterMap}"/>
+    </bean>
+
+    <bean id="dataGrabber" class="com.sabre.sabresonic.mockserver.core.message.datagrabbers.DataGrabberComposite">
+        <property name="dataGrabbers">
+            <util:list>
+                <bean class="com.sabre.sabresonic.mockserver.core.message.datagrabbers.PassengerNameDataGrabber"/>
+                <bean class="com.sabre.sabresonic.mockserver.core.message.datagrabbers.AirBookRequestDataGrabber"/>
+            </util:list>
+        </property>
+    </bean>
+
+    <bean id="dataReplacer" class="com.sabre.sabresonic.mockserver.core.message.replacers.DataReplacerComposite">
+        <property name="dataReplacers">
+            <util:list>
+                <bean class="com.sabre.sabresonic.mockserver.core.message.replacers.TravelItineraryReadPassengerNameReplacer"/>
+                <bean class="com.sabre.sabresonic.mockserver.core.message.replacers.IA_DepartureDatesReplacer"/>
+            </util:list>
+        </property>
+    </bean>
+
+    <bean id="cleanUpMapTask" class="org.springframework.scheduling.timer.MethodInvokingTimerTaskFactoryBean">
+        <property name="targetObject" ref="sessionsInfoManager"/>
+        <property name="targetMethod" value="cleanUpMap"/>
+    </bean>
+
+
+    <bean id="timerCleanUpMapTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+        <property name="timerTask" ref="cleanUpMapTask"/>
+        <property name="delay" value="${connectTimeout}"/>
+        <property name="period" value="${periodCleaningUpCounterMap}"/>
+    </bean>
+
+    <bean class="org.springframework.scheduling.timer.TimerFactoryBean">
+        <property name="scheduledTimerTasks">
+            <list>
+                <ref local="timerCleanUpMapTask"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="dateReplaceEngine" class="com.sabre.sabresonic.mockserver.core.message.replacers.DateReplaceEngine">
+        <property name="patternList">
+            <list>
+                <bean class="com.sabre.sabresonic.mockserver.core.message.replacers.patterns.DatePattern1"/>
+                <bean class="com.sabre.sabresonic.mockserver.core.message.replacers.patterns.DatePattern2"/>
+                <bean class="com.sabre.sabresonic.mockserver.core.message.replacers.patterns.DatePattern3"/>
+            </list>
+        </property>
+    </bean>
+</beans>

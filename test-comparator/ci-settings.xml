@@ -1,0 +1,107 @@
+<settings>
+
+  <proxies>
+    <proxy>
+      <active>true</active>
+      <protocol>http</protocol>
+      <host>www-ad-proxy.sabre.com</host>
+      <port>80</port>
+      <username>sg0893808</username>
+      <password>1234abc</password>
+      <nonProxyHosts>127.0.0.1|localhost|*.sabre.com|10.*.*.*
+      </nonProxyHosts>
+    </proxy>
+  </proxies>
+
+  <servers>
+    <server>
+      <id>ssweb2-internal</id>
+      <username>ssweb2-internal</username>
+      <password>ssweb2</password>
+    </server>
+    <server>
+      <id>ssweb2-snapshots</id>
+      <username>ssweb2-internal</username>
+      <password>ssweb2</password>
+    </server>
+    <server>
+      <id>staging</id>
+      <username>admin</username>
+      <password>admin124zzx</password>
+    </server>
+  </servers>
+
+
+  <mirrors>
+    <mirror>
+      <id>ssweb2-internal</id>
+      <mirrorOf>central</mirrorOf>
+      <name>SSWEB2 Internal Repository</name>
+      <url>http://maven.sabre.com/content/groups/ssweb2</url>
+    </mirror>
+  </mirrors>
+
+  <profiles>
+
+    <profile>
+
+      <id>ssweb2-internal</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+
+      <repositories>
+        <repository>
+          <id>ssweb2-internal</id>
+          <name>SSWEB2 Internal Repository</name>
+          <url>http://maven.sabre.com/content/groups/ssweb2</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+
+        <repository>
+          <id>ssweb2-snapshots</id>
+          <name>SSWEB2 Snapshot Repository</name>
+          <url>http://maven.sabre.com/content/groups/ssweb2-snapshots
+          </url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+		
+		<repository>
+			<id>vaadin-addons</id>
+			<url>http://maven.vaadin.com/vaadin-addons</url>
+		</repository>
+		<repository>
+			<id>diff_match_patch</id>
+			<url>http://google-diff-match-patch.googlecode.com/svn/trunk/maven</url>
+		</repository>
+
+	</repositories>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>codehaus-snapshots</id>
+			<url>http://nexus.codehaus.org/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
+
+    </profile>
+
+  </profiles>
+
+</settings>

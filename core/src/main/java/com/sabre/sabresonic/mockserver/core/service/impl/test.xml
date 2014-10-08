@@ -1,0 +1,83 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header>
+        <ns4:MessageHeader xmlns:ns8="http://www.opentravel.org/OTA/2003/05" xmlns:ns7="http://www.w3.org/2000/09/xmldsig#" xmlns:ns6="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:ns5="http://www.w3.org/1999/xlink" xmlns:ns4="http://www.ebxml.org/namespaces/messageHeader">
+            <ns4:From>
+                <ns4:PartyId>99999</ns4:PartyId>
+            </ns4:From>
+            <ns4:To>
+                <ns4:PartyId>123123</ns4:PartyId>
+            </ns4:To>
+            <ns4:CPAId>MN</ns4:CPAId>
+            <ns4:ConversationId>E6IE_DDFA2270E8399325F09E37E46DB9B3DD</ns4:ConversationId>
+            <ns4:Service>Air Shopping Service</ns4:Service>
+            <ns4:Action>SSWIntellisellRQ</ns4:Action>
+            <ns4:MessageData>
+                <ns4:MessageId>mid:2013-08-01T22:22:52@sabre.com</ns4:MessageId>
+                <ns4:Timestamp>2013-08-01T22:22:52</ns4:Timestamp>
+            </ns4:MessageData>
+        </ns4:MessageHeader>
+        <ns6:Security xmlns:ns8="http://www.opentravel.org/OTA/2003/05" xmlns:ns7="http://www.w3.org/2000/09/xmldsig#" xmlns:ns6="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:ns5="http://www.w3.org/1999/xlink" xmlns:ns4="http://www.ebxml.org/namespaces/messageHeader">
+            <ns6:BinarySecurityToken>Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/ACPCRTC!ICESMSLB\/CRT.LB!-3765104812287219456!1520434!0</ns6:BinarySecurityToken>
+        </ns6:Security>
+    </soap:Header>
+    <soap:Body>
+        <ns8:OTA_AirLowFareSearchRQ xmlns:ns8="http://www.opentravel.org/OTA/2003/05" xmlns:ns7="http://www.w3.org/2000/09/xmldsig#" xmlns:ns6="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:ns5="http://www.w3.org/1999/xlink" xmlns:ns4="http://www.ebxml.org/namespaces/messageHeader" DirectFlightsOnly="false" AvailableFlightsOnly="true" Target="Production" Version="1.5.0" MaxResponses="0">
+            <ns8:POS>
+                <ns8:Source PseudoCityCode="VGQ">
+                    <ns8:RequestorID Type="1" ID="1">
+                        <ns8:CompanyName Code="SSW">SSW</ns8:CompanyName>
+                    </ns8:RequestorID>
+                </ns8:Source>
+            </ns8:POS>
+            <ns8:OriginDestinationInformation RPH="1">
+                <ns8:DepartureDateTime>2013-08-10T00:00:00</ns8:DepartureDateTime>
+                <ns8:OriginLocation LocationCode="CPT"/>
+                <ns8:DestinationLocation LocationCode="HLA"/>
+                <ns8:TPA_Extensions>
+                    <ns8:DateFlexibility NbrOfDays="3"/>
+                    <ns8:SegmentType Code="O"/>
+                    <ns8:MaxOneWayOptions Value="100"/>
+                    <ns8:NumOneWayOptions Number="20"/>
+                </ns8:TPA_Extensions>
+            </ns8:OriginDestinationInformation>
+            <ns8:OriginDestinationInformation RPH="2">
+                <ns8:DepartureDateTime>2013-09-24T00:00:00</ns8:DepartureDateTime>
+                <ns8:OriginLocation LocationCode="HLA"/>
+                <ns8:DestinationLocation LocationCode="CPT"/>
+                <ns8:TPA_Extensions>
+                    <ns8:DateFlexibility NbrOfDays="3"/>
+                    <ns8:SegmentType Code="O"/>
+                    <ns8:MaxOneWayOptions Value="100"/>
+                    <ns8:NumOneWayOptions Number="20"/>
+                </ns8:TPA_Extensions>
+            </ns8:OriginDestinationInformation>
+            <ns8:TravelPreferences ETicketDesired="false">
+                <ns8:VendorPref Code="MN"/>
+                <ns8:CabinPref Cabin="Y" PreferLevel="Preferred"/>
+            </ns8:TravelPreferences>
+            <ns8:TravelerInfoSummary>
+                <ns8:SeatsRequested>1</ns8:SeatsRequested>
+                <ns8:AirTravelerAvail>
+                    <ns8:PassengerTypeQuantity Code="ADT" Quantity="1"/>
+                </ns8:AirTravelerAvail>
+                <ns8:PriceRequestInformation FareQualifier="false" CurrencyCode="ZAR" Reprice="false" ProcessThruFaresOnly="false">
+                    <ns8:TPA_Extensions>
+                        <ns8:Indicators>
+                            <ns8:RetainFare Ind="false"/>
+                            <ns8:MinMaxStay Ind="true"/>
+                            <ns8:RefundPenalty Ind="true"/>
+                            <ns8:ResTicketing Ind="true"/>
+                            <ns8:TravelPolicy Ind="false"/>
+                        </ns8:Indicators>
+                    </ns8:TPA_Extensions>
+                </ns8:PriceRequestInformation>
+            </ns8:TravelerInfoSummary>
+            <ns8:TPA_Extensions>
+                <ns8:IntelliSellTransaction>
+                    <ns8:RequestType Name="CALDATES"/>
+                    <ns8:ServiceTag Name="MN"/>
+                </ns8:IntelliSellTransaction>
+            </ns8:TPA_Extensions>
+        </ns8:OTA_AirLowFareSearchRQ>
+    </soap:Body>
+</soap:Envelope>

@@ -1,0 +1,8 @@
+<testproxy.keys.SecurityKeyManager>
+  <keys>
+    <testproxy.keys.KeyInfo>
+      <keyPath>test.sabresonicweb.com.jks</keyPath>
+      <password>flyme757</password>
+    </testproxy.keys.KeyInfo>
+  </keys>
+</testproxy.keys.SecurityKeyManager>

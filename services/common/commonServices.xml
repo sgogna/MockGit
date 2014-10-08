@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ServiceGroup> 
+  <service class="Sequence"> 
+    <XPathGetValue> 
+      <input>request</input>  
+      <query>'//*[local-name()=\'Action\']/text()'</query>  
+      <result>ServiceName</result> 
+    </XPathGetValue>  
+    <XPathGetValue> 
+      <input>request</input>  
+      <query>'//*[local-name()=\'CPAId\']/text()'</query>  
+      <result>Airlines</result> 
+    </XPathGetValue>  
+    <XPathGetValue> 
+      <input>request</input>  
+      <query>'//*[local-name()=\'HostCommand\']/text()'</query>  
+      <result>HostCommand</result> 
+    </XPathGetValue>  
+    <XPathGetValue> 
+      <input>request</input>  
+      <query>'//@LocationCode'</query>  
+      <result>LocationCode</result> 
+    </XPathGetValue>  
+    <XPathGetValue> 
+      <input>request</input>  
+      <query>'//*[local-name()=\'PassengerTypeQuantity\']/@Code'</query>  
+      <result>PassengerTypeQuantity</result> 
+    </XPathGetValue>  
+    <OgnlExpression expression="pathToFile= basePath + '/' + Airlines[0] + '/' + ServiceName[0]"/>  
+    <RemoveRequestHeader name="'content-length'"/>  
+    <OgnlExpression expression="@java.lang.System@out.println('INSIDE COMMONS XML :::: ' + ServiceName[0] + '' )"/>  
+    <OgnlExpression expression="@java.lang.System@out.println('INSIDE COMMONS XML :::: ' + ((ServiceName[0] = '') != 'SessionCreateRQ'))"/>  
+    <If expression="((ServiceName[0] = '') != 'SessionCreateRQ')"> 
+      <then class="Sequence"> 
+        <If expression="mode == 'RECORD'"> 
+          <then class="Sequence"> 
+            <InvokeHttp> 
+              <endpoint>endpoint</endpoint> 
+            </InvokeHttp>  
+            <RecordSOAPToFile> 
+              <basePath>pathToFile</basePath> 
+            </RecordSOAPToFile>  
+            <RemoveResponseHeader name="'Transfer-Encoding'"/> 
+          </then> 
+        </If>  
+        <If expression="mode == 'REPLAY'"> 
+          <then class="Sequence"> 
+            <ReadSOAPFromFile> 
+              <basePath>pathToFile</basePath> 
+            </ReadSOAPFromFile>  
+            <AddHeader name="'Content-Type'" value="'text/xml'"/> 
+          </then> 
+        </If>  
+        <If expression="timeout > 0 "> 
+          <then class="Sequence"> 
+            <Timeout milis="timeout"/> 
+          </then> 
+        </If>  
+        <If expression="mode == 'AUTO'"> 
+          <then class="Sequence">
+            <InvokeHttp> 
+              <endpoint>endpoint</endpoint> 
+            </InvokeHttp>  
+            <MixedModeSOAPToFile> 
+              <basePath>pathToFile</basePath> 
+            </MixedModeSOAPToFile>  
+            <AddHeader name="'Content-Type'" value="'text/xml'"/> 
+          </then> 
+        </If>  
+        <If expression="timeout > 0 "> 
+          <then class="Sequence"> 
+            <Timeout milis="timeout"/> 
+          </then> 
+        </If> 
+        <If expression="mode == 'PASSTHRU'"> 
+          <then class="Sequence">
+            <InvokeHttp> 
+              <endpoint>endpoint</endpoint> 
+            </InvokeHttp>  
+            <TransparentModeSOAP> 
+             
+            </TransparentModeSOAP>  
+            <AddHeader name="'Content-Type'" value="'text/xml'"/> 
+          </then> 
+        </If>
+      </then> 
+    </If> 
+  </service> 
+</ServiceGroup>

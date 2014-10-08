@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="ASYNC" class="org.apache.log4j.AsyncAppender">
+        <param name="BufferSize" value="1024"/>
+        <param name="Blocking" value="false"/>
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="CONSOLE"/>
+
+    </appender>
+
+  <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+    <param name="Target" value="System.out" />
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d %-5p [%t] %c{1} - %m%n" />
+    </layout>
+  </appender>
+  
+  <appender name="CONSOLE_ERROR" class="org.apache.log4j.ConsoleAppender">
+    <param name="Target" value="System.out" />
+    <param name="Threshold" value="ERROR"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d %-5p [%t] %c{1} - %m%n" />
+    </layout>
+  </appender>
+
+  <appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="File" value="${catalina.base}/logs/proxy.log" />
+    <param name="DatePattern" value="'.'yyyy-MM-dd-HH" />
+    <param name="Append" value="true" />
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d [%-5p] [%t - %X{user}] %50.50c - %m%n" />
+    </layout>
+  </appender>
+
+  <logger name="proxy.info" additivity="false">
+    <level value="INFO" />
+    <appender-ref ref="FILE" />
+    <appender-ref ref="CONSOLE" />
+  </logger>
+
+  <root>
+    <level value="INFO" />
+    <appender-ref ref="ASYNC" />
+  </root>
+
+</log4j:configuration>
+

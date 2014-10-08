@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ServiceGroup>
+	<name>Record SOAP service</name>
+	<enabled>true</enabled>
+	<methodPattern class="SimpleMatcher" pattern="*"/>
+	<!-- http method: GET, POST, PUT, OPTIONS ... -->
+	<urlPattern class="SimpleMatcher" pattern="*generic/soap/record*"/>
+	<service class="Sequence">
+		<ReplaceUrlPath>
+			<pattern>'/testproxy/generic/soap/record'</pattern>
+		</ReplaceUrlPath>
+		<XPathGetValue>
+			<input>request</input>
+			<query>'//*[local-name()=\'Action\']/text()'</query>
+			<result>Actions</result>
+		</XPathGetValue>
+      <OgnlExpression expression="@java.lang.System@out.println('ACTION NAME IS ::::::' + (Actions[0] + '' ))"/>
+     <If expression="((Actions[0] + '')  != 'SSWIntellisellRQ')">
+        	<then class="Sequence">
+              <OgnlExpression expression="@java.lang.System@out.println('Inside LAST IF :::: ' + (Actions[0] + '' ))"/>
+              <Invoke service="'/common/commonServices.xml'">
+					<inputs>
+				    <!--  <Param name="'mode'" value="'RECORD'"/>  -->
+                     <!--<Param name="'mode'" value="'REPLAY'"/> -->
+                     <!--<Param name="'mode'" value="'AUTO'"/>-->
+                      <Param name="'mode'" value="'PASSTHRU'"/>
+					 <Param name="'request'" value="request"/>
+					 <Param name="'endpoint'" value="'https://sws-crt.cert.sabre.com/'"/>
+					 <Param name="'basePath'" value="'record/soap/'"/>
+					</inputs>
+					<outputs>
+						<Param name="'response'" value="response"/>
+					</outputs>
+				</Invoke>
+			</then>
+		</If>
+ 
+      <If expression="((Actions[0] + '')  == 'SSWIntellisellRQ')">
+         	<then class="Sequence">
+              <Invoke service="'/common/SSWIntellisell.xml'">
+					<inputs>
+						<!--<Param name="'mode'" value="'RECORD'"/>-->
+						<!--<Param name="'mode'" value="'REPLAY'"/> -->
+                        <!--<Param name="'mode'" value="'AUTO'"/>-->
+                        <Param name="'mode'" value="'PASSTHRU'"/>
+						<Param name="'request'" value="request"/>
+						<Param name="'endpoint'" value="'https://sws-crt.cert.sabre.com/'"/>
+						<Param name="'basePath'" value="'record/soap/'"/>
+						<!-- <Param name="'timeout'" value="3*1000"/> -->
+					</inputs>
+					<outputs>
+						<Param name="'response'" value="response"/>
+					</outputs>
+				</Invoke>
+			</then>
+		</If>
+	<!--	<If expression="((Actions[0] = '') == 'SabreCommandLLSRQ')">
+			<then class="Sequence">
+				<Invoke service="'/common/SabreCommand.xml'">
+					<inputs>
+						<Param name="'mode'" value="'RECORD'"/>
+						<Param name="'request'" value="request"/>
+						<Param name="'endpoint'" value="'https://sws-crt.cert.sabre.com/'"/>
+						<Param name="'basePath'" value="'record/soap/'"/>						
+					</inputs>
+					<outputs>
+						<Param name="'response'" value="response"/>
+					</outputs>
+				</Invoke>
+			</then>
+		</If> -->
+	</service>
+</ServiceGroup>

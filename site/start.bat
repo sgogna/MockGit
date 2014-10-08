@@ -1,0 +1,2 @@
+title Test-Proxy Site
+mvn -Dtestproxy.url=localhost -Dhttp.proxyUser=GLOBAL\SG0919624 -Dhttp.proxyPassword=trinity1 -DrecordFixedResponses=true -Dsite.save.path=./ws_calls -DcustomTagsFilePath=./guiTags -Dtestgui.version=1.1.0 -Dtestproxy.version=1.1.0 clean test

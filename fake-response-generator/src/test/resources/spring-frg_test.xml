@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+">
+    <context:annotation-config/>
+    
+    <bean id="xmlFile" class="java.lang.String" >
+        <constructor-arg value="sampleXmlDoc.xml"  />
+    </bean>
+    
+    
+    <bean id="freemarkerConfig" class="freemarker.template.Configuration">
+    </bean>
+    
+    <bean id="hotelAvalGenerator" class="com.sabre.sabresonic.mockserver.fdg.generator.FreemarkerGenerator">
+        <property name="configuration" ref="freemarkerConfig"/>
+        <property name="templatePath" value="templates/HotelAvailability.ftl"/>
+    </bean>
+    
+    <bean id="defaultFdgProcessor" class="com.sabre.sabresonic.mockserver.fdg.processor.DefaultFdgProcessor"/>
+    
+    <bean id="regexOvervriteProcessor" class="com.sabre.sabresonic.mockserver.fdg.processor.RegexOvervriteProcessor">
+        <constructor-arg ref="defaultFdgProcessor"/>
+        <property name="generator" ref="hotelAvalGenerator"/>
+        <property name="regex" value="^$"/>
+        <property name="processNullResponse" value="true"/>
+    </bean>
+    
+    <bean id="addItemProcessor" class="com.sabre.sabresonic.mockserver.fdg.processor.AddItemProcessor">
+        <constructor-arg ref="regexOvervriteProcessor"/>
+        <property name="maxItemsToGenerate" value="5"/>
+        <property name="itemGenerator" ref="roomStayGenerator"/>
+        <property name="xPath" value="//*[local-name()='RoomStays']"/>
+    </bean>
+    
+    <bean id="roomStayGenerator" class="com.sabre.sabresonic.mockserver.fdg.generator.FreemarkerGenerator">
+        <property name="configuration" ref="freemarkerConfig"/>
+        <property name="templatePath" value="templates/RoomStay.ftl"/>
+    </bean>
+    
+
+</beans>

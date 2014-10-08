@@ -1,0 +1,17 @@
+com\sabre\sabresonic\mockserver\frg\generator\FrdRequestAware.class
+com\sabre\sabresonic\mockserver\frg\xpath\XPathUtil.class
+com\sabre\sabresonic\mockserver\frg\exception\FdgException.class
+com\sabre\sabresonic\mockserver\frg\generator\TemplateBasedGenerator.class
+com\sabre\sabresonic\mockserver\frg\object\FrgResponse.class
+com\sabre\sabresonic\mockserver\frg\generator\FreemarkerGenerator.class
+com\sabre\sabresonic\mockserver\frg\object\FrgRequest.class
+com\sabre\sabresonic\mockserver\frg\processor\AbstractFdgProcessorDecorator.class
+com\sabre\sabresonic\mockserver\frg\generator\Generator.class
+com\sabre\sabresonic\mockserver\frg\dataModel\ext\RotateIdGenerator.class
+com\sabre\sabresonic\mockserver\frg\processor\AddItemProcessor.class
+com\sabre\sabresonic\mockserver\frg\chain\FrgHandler.class
+com\sabre\sabresonic\mockserver\frg\processor\RegexOvervriteProcessor.class
+com\sabre\sabresonic\mockserver\frg\processor\FdgProcessor.class
+com\sabre\sabresonic\mockserver\frg\processor\DefaultFdgProcessor.class
+com\sabre\sabresonic\mockserver\frg\chain\AbstractHandler.class
+com\sabre\sabresonic\mockserver\frg\chain\RequestTypeHandler.class

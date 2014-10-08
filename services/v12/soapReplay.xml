@@ -1,0 +1,28 @@
+<ServiceGroup>
+  <name>Record SOAP service</name>
+  <enabled>true</enabled>
+  <methodPattern class="SimpleMatcher" pattern="*"/> <!-- http method: GET, POST, PUT, OPTIONS ... -->  
+  <urlPattern class="SimpleMatcher" pattern="*generic/soap/replay*"/>
+  
+  <service class="Sequence">
+  
+	<ReplaceUrlPath>
+		<pattern>'/testproxy/generic/soap/replay'</pattern>
+	</ReplaceUrlPath>
+	
+	<Invoke service="'/common/commonServices.xml'" >    
+		<inputs>
+			<Param name="'mode'" value="'RECORD'"/>
+			<Param name="'request'" value="request"/>
+			<Param name="'endpoint'" value="'http://sws-crt.cert.sabre.com/'"/>
+			<Param name="'basePath'" value="'record/soap/'"/>
+			<!-- <Param name="'timeout'" value="3*1000"/> -->
+		</inputs>
+		<outputs>
+			<Param name="'response'" value="response"/>
+		</outputs>
+	</Invoke>
+	
+  </service>
+  
+</ServiceGroup>

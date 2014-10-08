@@ -1,0 +1,7 @@
+com\sabre\sabresonic\mockserver\frg\processor\AddItemProcessorTest.class
+com\sabre\sabresonic\mockserver\frg\generator\FreemarkerGeneratorTest.class
+com\sabre\sabresonic\mockserver\frg\processor\AddItemProcessorTest$1.class
+com\sabre\sabresonic\mockserver\frg\xpath\XPathUtilTest.class
+com\sabre\sabresonic\mockserver\frg\processor\DefaultFdgProcessorTest.class
+com\sabre\sabresonic\mockserver\frg\processor\RegexOvervriteProcessorTest.class
+com\sabre\sabresonic\mockserver\frg\TestBase.class
